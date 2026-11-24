@@ -1,12 +1,19 @@
+
 FROM node:20-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
 
+COPY . .
+
 RUN npm run build
+
+RUN chown -R node:node /app
+
+USER node
 
 EXPOSE 8082
 
